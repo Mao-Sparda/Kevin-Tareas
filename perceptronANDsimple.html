@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    const X = [[0, 0], [0, 1], [1, 0], [1, 1]];
+    
+    // Compuerta AND
+    const yAND = [0, 0, 0, 1];
+    let wAND = [Math.random(), Math.random()];
+    let bAND = Math.random();
+    const eta = 0.1;
+
+    for (let epoch = 0; epoch < 100; epoch++) {
+        for (let i = 0; i < X.length; i++) {
+            const y_pred = (wAND[0] * X[i][0] + wAND[1] * X[i][1] + bAND) > 0 ? 1 : 0;
+            const e = yAND[i] - y_pred;
+            wAND[0] += eta * e * X[i][0];
+            wAND[1] += eta * e * X[i][1];
+            bAND += eta * e;
+        }
+    }
+    console.log("Pesos AND:", wAND);
+    console.log("Bias AND:", bAND);
+    
+    // Compuerta OR
+    const yOR = [0, 1, 1, 1];
+    let wOR = [Math.random(), Math.random()];
+    let bOR = Math.random();
+
+    for (let epoch = 0; epoch < 100; epoch++) {
+        for (let i = 0; i < X.length; i++) {
+            const y_pred = (wOR[0] * X[i][0] + wOR[1] * X[i][1] + bOR) > 0 ? 1 : 0;
+            const e = yOR[i] - y_pred;
+            wOR[0] += eta * e * X[i][0];
+            wOR[1] += eta * e * X[i][1];
+            bOR += eta * e;
+        }
+    }
+    console.log("Pesos OR:", wOR);
+    console.log("Bias OR:", bOR);
+</script>
+</html>
+
